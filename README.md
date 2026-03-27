@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/26302927/README.md)
+[README.md](https://github.com/user-attachments/files/26306540/README.md)
 # なにわモーター 統合ツール 完全版
 
 ## できること
@@ -21,5 +21,3 @@
 - 作業カウンターは素材買取と別保存です
 - ギャングデータはアプリ上で登録できます
 - 検索ワードはカンマ区切りで入力します
-- ギャングデータは `gang-data.json` を管理者が更新します
-- 作業カウンターは各端末のブラウザ保存です
