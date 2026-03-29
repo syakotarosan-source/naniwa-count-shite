@@ -1118,10 +1118,6 @@
                 </div>
               </div>
             </div>
-            <div class="card">
-              <h2 class="section-title">共有ギャング一覧</h2>
-              <div id="gangRegistryList" class="registry-list"></div>
-            </div>
           </div>
           <div class="gang-layout">
             <div class="card">
@@ -2248,7 +2244,6 @@
         console.warn('gang-data.json の読み込みに失敗したため初期データを使用します', e);
         sharedGangData = [...defaultGangData];
       }
-      renderGangRegistryList();
       renderGangQuickButtons();
       const input = document.getElementById('gangSearchInput');
       if (input && input.value.trim()) searchGangData();
