@@ -9,7 +9,2196 @@ body{background:#f8fafc;color:#0f172a;font-family:sans-serif;margin:0;padding:20
 button{background:#22c55e;color:#fff;border:none;padding:10px;border-radius:8px;}
 </style>
 </head>
+<body>[
+  {<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>なにわモーター 統合ツール 完全版</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg1: #08110d;
+      --bg2: #0d1712;
+      --card: rgba(14, 24, 19, 0.96);
+      --card2: #0a120e;
+      --line: #234335;
+      --line2: #2d4b3d;
+      --text: #eef7f1;
+      --muted: #a8c6b3;
+      --accent: #59f0a8;
+      --accent2: #7fffc0;
+      --blue: #1ea7ff;
+      --red: #e34a4a;
+      --green: #00c16a;
+      --gray: #6b7f74;
+      --yellow: #ffd166;
+      --purple: #7c3aed;
+      --shadow: 0 12px 32px rgba(0,0,0,0.28);
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Yu Gothic", "Hiragino Sans", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(0, 180, 120, 0.14), transparent 30%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 6px 6px 28px;
+    }
+
+    .header {
+      width: 100%;
+      background: rgba(10, 20, 16, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 6px;
+    }
+
+    .title {
+      margin: 0;
+      text-align: center;
+      font-size: 30px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-top: 6px;
+      color: #a9d8bd;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .version-badge {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 12px;
+      color: #d8fff0;
+      background: rgba(89, 240, 168, 0.12);
+      border: 1px solid rgba(89, 240, 168, 0.35);
+      border-radius: 999px;
+      padding: 6px 10px;
+      display: inline-block;
+    }
+
+    .version-wrap {
+      text-align: center;
+    }
+
+    .lock-screen {
+      width: min(540px, calc(100% - 24px));
+      margin: 60px auto;
+      background: rgba(10, 20, 16, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .lock-title {
+      font-size: 28px;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .lock-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .card {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px;
+      margin-bottom: 6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      color: var(--accent2);
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.9fr);
+      gap: 8px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #b7d9c4;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      background: #09110d;
+      color: #effff7;
+      border: 1px solid #315544;
+      border-radius: 10px;
+      padding: 10px 11px;
+      outline: none;
+      transition: 0.15s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(89, 240, 168, 0.1);
+    }
+
+    textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.05);
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .help-note {
+      height: 100%;
+      background: rgba(20, 40, 32, 0.7);
+      border: 1px solid #305342;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #d4eee0;
+      line-height: 1.7;
+    }
+
+    .table-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      border: 1px solid #294537;
+      border-radius: 12px;
+      background: rgba(5, 10, 8, 0.25);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1320px;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #0c1510;
+      color: var(--accent2);
+      font-size: 13px;
+      white-space: nowrap;
+      box-shadow: inset 0 -1px 0 #274638;
+    }
+
+    th, td {
+      border: 1px solid #2f4e40;
+      padding: 8px 6px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    td {
+      background: #101a15;
+      font-size: 13px;
+      transition: background 0.15s ease;
+    }
+
+    tr.active-row td {
+      background: rgba(40, 120, 80, 0.20);
+    }
+
+    tr.stopped-row td {
+      background: rgba(130, 45, 45, 0.16);
+    }
+
+    .sticky-col {
+      position: sticky;
+      left: 0;
+      z-index: 4;
+      background: #101a15;
+      box-shadow: 8px 0 14px rgba(0,0,0,0.14);
+    }
+
+    thead .sticky-col {
+      z-index: 6;
+      background: #0c1510;
+    }
+
+    tr.active-row .sticky-col {
+      background: rgba(40, 120, 80, 0.28);
+    }
+
+    tr.stopped-row .sticky-col {
+      background: rgba(130, 45, 45, 0.22);
+    }
+
+    .material-name {
+      min-width: 150px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .qty-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      min-width: 140px;
+    }
+
+    .qty-btn {
+      width: 34px;
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid #355746;
+      background: #0b1510;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .qty-btn:hover {
+      background: #122019;
+    }
+
+    .qty-input {
+      width: 96px;
+      min-width: 96px;
+      text-align: right;
+      font-size: 17px;
+      padding: 9px 8px;
+      font-weight: bold;
+    }
+
+    .price-input {
+      width: 104px;
+      min-width: 104px;
+      text-align: right;
+      font-size: 14px;
+      padding: 9px 8px;
+    }
+
+    .small-input {
+      width: 82px;
+      min-width: 82px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 14px;
+      padding: 8px 6px;
+      font-weight: bold;
+    }
+
+    .result-cell {
+      min-width: 92px;
+      font-size: 14px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .subtotal-cell { color: #ffffff; }
+    .bonus-cell { color: var(--yellow); }
+    .joint-cell { color: #caa5ff; }
+
+    .summary-box {
+      background: var(--card2);
+      border: 1px solid var(--line2);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      min-height: 82px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .summary-title {
+      font-size: 12px;
+      color: #a8d2b8;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .summary-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffffff;
+      word-break: break-word;
+      line-height: 1.25;
+    }
+
+    .summary-value.main {
+      color: var(--accent);
+    }
+
+    .detail-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 8px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .summary-inline-textarea {
+      width: 100%;
+      min-height: 220px;
+      background: #07100c;
+      color: #f4fff8;
+      border: 1px solid #355746;
+      border-radius: 12px;
+      padding: 14px;
+      line-height: 1.7;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .side-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    button.main-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.15s ease;
+      width: 100%;
+    }
+
+    button.main-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn-save { background: var(--green); color: white; }
+    .btn-copy { background: var(--blue); color: white; }
+    .btn-reset { background: var(--gray); color: white; }
+    .btn-delete { background: var(--red); color: white; }
+    .btn-print { background: var(--yellow); color: #111; }
+    .btn-lock { background: var(--purple); color: white; }
+
+    .mini-box {
+      background: var(--card2);
+      border: 1px solid var(--line2);
+      border-radius: 12px;
+      padding: 12px;
+      min-height: 104px;
+    }
+
+    .mini-box-title {
+      margin: 0 0 8px;
+      color: var(--accent2);
+      font-size: 15px;
+    }
+
+    .big-stat {
+      font-size: 23px;
+      font-weight: bold;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .history-item {
+      background: var(--card2);
+      border: 1px solid #294537;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: #a5c6b4;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .history-name {
+      color: #effff7;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .history-total {
+      color: var(--accent);
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .history-detail,
+    .history-memo {
+      color: #dceee4;
+      font-size: 13px;
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    .history-memo {
+      margin-top: 8px;
+      color: #bad8c8;
+    }
+
+    .history-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .copied-badge {
+      display: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      background: rgba(0, 193, 106, 0.15);
+      color: #85ffc5;
+      border: 1px solid rgba(0, 193, 106, 0.45);
+    }
+
+    .copied-badge.show {
+      display: inline-block;
+    }
+
+    .rank-list {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.8;
+      color: #eefcf4;
+    }
+
+    .empty {
+      text-align: center;
+      color: #9fc0ae;
+      padding: 18px 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .stop-badge,
+    .ok-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .stop-badge {
+      background: rgba(227, 74, 74, 0.15);
+      color: #ff9e9e;
+      border: 1px solid rgba(227, 74, 74, 0.5);
+    }
+
+    .ok-badge {
+      background: rgba(0, 193, 106, 0.15);
+      color: #85ffc5;
+      border: 1px solid rgba(0, 193, 106, 0.45);
+    }
+
+    .cell-check {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (min-width: 1400px) {
+      .container {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      .card, .header {
+        border-radius: 12px;
+      }
+
+      table {
+        min-width: 1380px;
+      }
+    }
+
+    @media (min-width: 1700px) {
+      .summary-grid {
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+      }
+
+      table {
+        min-width: 1450px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        overflow-x: visible;
+      }
+
+      #lockWrapper,
+      .no-print {
+        display: none !important;
+      }
+
+      .container {
+        padding: 0;
+      }
+
+      .card,
+      .header {
+        box-shadow: none;
+        border: 1px solid #999;
+        background: #fff;
+        color: #000;
+      }
+
+      textarea,
+      input {
+        border: 1px solid #999;
+        color: #000;
+        background: #fff;
+      }
+
+      .title,
+      .section-title {
+        color: #000;
+      }
+
+      .sticky-col,
+      thead th {
+        position: static !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .summary-grid,
+      .detail-layout {
+        display: block;
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .summary-grid,
+      .detail-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .side-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .summary-grid,
+      .detail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 8px 8px 24px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .header {
+        padding: 14px;
+      }
+
+      .card {
+        padding: 10px;
+      }
+
+      table {
+        min-width: 1280px;
+      }
+
+      .summary-inline-textarea {
+        min-height: 200px;
+      }
+
+      .side-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding: 6px 6px 20px;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .subtitle {
+        font-size: 12px;
+      }
+
+      th, td {
+        font-size: 12px;
+        padding: 9px 7px;
+      }
+
+      .summary-value,
+      .big-stat {
+        font-size: 21px;
+      }
+
+      .qty-input {
+        width: 92px;
+        min-width: 92px;
+        font-size: 16px;
+      }
+
+      .qty-control {
+        min-width: 138px;
+      }
+
+      .side-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+
+    .hidden { display:none !important; }
+    .app-page { display: none; }
+    .app-page.active { display: block; }
+    .global-top { margin-bottom: 12px; }
+    .nav-row { display:flex; gap:10px; flex-wrap:wrap; margin: 0 0 14px; }
+    .nav-btn {
+      width:auto;
+      padding: 11px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(17,44,30,0.96), rgba(9,24,17,0.96));
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+    .nav-btn.purple { background: linear-gradient(180deg, #8b5cf6, #7c3aed); border-color: #9d7cff; }
+    .nav-btn:hover { filter: brightness(1.08); }
+    .home-grid {
+      display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px;
+    }
+    .feature-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(12,23,18,0.98), rgba(7,16,12,0.98));
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .feature-card h3 { margin:0 0 12px; font-size: 30px; color: var(--accent2); }
+    .feature-card p, .feature-card li { color: var(--text); line-height:1.7; }
+    .feature-card ul { margin: 0 0 16px 18px; padding: 0; }
+    .home-title { margin: 8px 0 18px; font-size: 34px; color: var(--text); }
+    .page-title { font-size: 22px; margin:0 0 14px; color: var(--accent2); }
+    .gang-grid { display:grid; grid-template-columns: 1.15fr 1fr; gap:16px; }
+    .gang-layout { display:grid; gap:16px; }
+    .search-row2 { display:grid; grid-template-columns: 1fr auto; gap: 10px; }
+    .gang-result {
+      min-height: 180px; border:1px solid var(--line); background: rgba(7,16,12,0.95);
+      border-radius: 16px; padding: 16px; color: var(--text);
+    }
+    .tag-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .tag {
+      background: rgba(89,240,168,0.10); border:1px solid rgba(89,240,168,0.22); color: var(--accent2);
+      border-radius: 999px; padding: 6px 10px; font-size: 13px; font-weight: 700;
+    }
+    .quick-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .quick-btn, .counter-btn, .small-btn, .danger-btn {
+      border:none; cursor:pointer; border-radius: 14px; font-weight:700;
+      color: var(--text); box-shadow: var(--shadow);
+    }
+    .quick-btn {
+      background: linear-gradient(180deg, rgba(47,84,65,0.95), rgba(22,43,32,0.95)); padding: 12px 14px;
+      border:1px solid var(--line2);
+    }
+    .counter-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:10px; }
+    .counter-btn {
+      min-height: 66px; font-size: 28px;
+      background: linear-gradient(180deg, rgba(17,44,30,0.96), rgba(10,24,17,0.96));
+      border:1px solid var(--line2);
+    }
+    .counter-btn:hover, .quick-btn:hover, .small-btn:hover, .danger-btn:hover { filter: brightness(1.08); }
+    .summary-split { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
+    .panel {
+      border:1px solid var(--line); border-radius:16px; padding:14px; background: rgba(9,18,14,0.96);
+    }
+    .panel h3 { margin:0 0 10px; color: var(--accent2); }
+    .stat-grid2 { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; }
+    .stat-box2 { border:1px solid var(--line); border-radius:16px; padding:14px; background: rgba(9,18,14,0.96); text-align:center; }
+    .stat-box2 .label { color: var(--muted); font-size: 13px; margin-bottom:6px; }
+    .stat-box2 .value { color: var(--text); font-size: 28px; font-weight:800; }
+    .mini-row { display:flex; justify-content:space-between; gap:10px; padding:8px 0; border-bottom:1px dashed rgba(168,198,179,0.15); }
+    .mini-row:last-child { border-bottom:none; }
+    .history-box { max-height: 280px; overflow:auto; }
+    .history-chip { border-bottom:1px dashed rgba(168,198,179,0.15); padding:10px 0; }
+    .history-chip:last-child { border-bottom:none; }
+    .form-grid2 { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
+    .form-grid1 { display:grid; gap:12px; }
+    .small-btn { background: linear-gradient(180deg, rgba(0,193,106,0.95), rgba(0,125,68,0.95)); padding:10px 14px; }
+    .danger-btn { background: linear-gradient(180deg, rgba(227,74,74,0.95), rgba(138,33,33,0.95)); padding:10px 14px; }
+    .toolbar2 { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .registry-list { display:grid; gap:12px; }
+    .registry-item { border:1px solid var(--line); border-radius:16px; padding:14px; background: rgba(9,18,14,0.96); }
+    .registry-head { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
+    .empty-note { color: var(--muted); padding: 8px 0; }
+    .page-desc { color: var(--muted); margin:0 0 14px; line-height:1.7; }
+    .muted-inline { color: var(--muted); font-size: 13px; }
+    @media (max-width: 1100px) {
+      .gang-grid, .home-grid, .summary-split, .form-grid2, .stat-grid2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .search-row2 { grid-template-columns: 1fr; }
+      .counter-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .feature-card h3 { font-size: 24px; }
+      .home-title { font-size: 28px; }
+    }
+
+  </style>
+</head>
 <body>
+  <div id="lockWrapper" class="lock-screen">
+    <div class="lock-title">なにわモーター 統合ツール ロック</div>
+    <div class="lock-sub">
+      パスコードを入れるとホーム画面が開きます。<br>
+      初期パスコードは <b>7000</b> です。
+    </div>
+    <label for="unlockCode">パスコード</label>
+    <input type="password" id="unlockCode" placeholder="4桁くらい推奨" />
+    <div class="buttons">
+      <button class="main-btn btn-lock" onclick="unlockApp()">解除</button>
+      <button class="main-btn btn-reset" onclick="changePasscode()">パスコード変更</button>
+    </div>
+    <div class="muted">このロックは簡易管理用です。ブラウザ保存なので、金庫というより鍵付き工具箱くらいの防御力です。</div>
+  </div>
+
+  <div id="appWrapper" class="hidden">
+    <div class="container">
+      <div class="header">
+        <h1 class="title">なにわモーター 統合ツール</h1>
+        <div class="subtitle">素材買取アプリと、ギャングカラー検索＋修理/色替え台数カウンターを1つにまとめた総合版</div>
+        <div class="version-wrap"><div class="version-badge">Ver.2026-03-26-COMPLETE1</div></div>
+      </div>
+
+      <section id="homePage" class="app-page active">
+        <div class="home-title">ホーム</div>
+        <div class="page-desc">使いたい機能を選ぶだけです。ホームに戻っても、素材買取も作業カウンターも保存されたまま残ります。</div>
+        <div class="home-grid">
+          <div class="feature-card">
+            <h3>素材買取アプリ</h3>
+            <p>今までの素材買取管理をそのまま搭載。買取、ボーナス、joint、履歴、ランキング、CSV、印刷、ロックまで対応しています。</p>
+            <ul>
+              <li>素材ごとの数量、単価、停止状態を管理</li>
+              <li>ボーナス、jointを素材別に個別設定</li>
+              <li>履歴保存、ランキング、CSV、印刷あり</li>
+            </ul>
+            <button class="main-btn btn-save" onclick="showPage('materialPage')">素材買取を開く</button>
+          </div>
+          <div class="feature-card">
+            <h3>ギャングカラー＋作業管理</h3>
+            <p>ギャングカラー検索、修理台数、色替え台数カウンターをまとめた現場向けページです。ギャング一覧は管理者が JSON を更新して全員に共有します。</p>
+            <ul>
+              <li>ギャング名、色名、別名、略称で検索</li>
+              <li>修理 1〜8か所、色替え 1〜4か所を台数集計</li>
+              <li>履歴、ひとつ戻す、保存あり</li>
+            </ul>
+            <button class="main-btn btn-copy" onclick="showPage('gangPage')">ギャングカラーを開く</button>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="materialPage" class="app-page">
+        <div class="nav-row no-print">
+          <button class="nav-btn" onclick="showPage('homePage')">ホームへ戻る</button>
+          <button class="nav-btn purple" onclick="lockApp()">ロック</button>
+        </div>
+<div class="version-wrap">
+          <div class="version-badge">現在の版: Ver.2026-03-22-FW3.2</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">基本情報</h2>
+        <div class="grid-4">
+          <div>
+            <label for="staffName">担当従業員名</label>
+            <input type="text" id="staffName" placeholder="例: ザコ太郎" />
+          </div>
+          <div>
+            <label for="customerName">業者名 / お客様名</label>
+            <input type="text" id="customerName" placeholder="例: ○○商会" />
+          </div>
+          <div>
+            <label for="bonusThreshold">ボーナス発生ライン</label>
+            <input type="number" id="bonusThreshold" value="2000" min="1" />
+          </div>
+          <div>
+            <label for="jointThreshold">joint判定ライン</label>
+            <input type="number" id="jointThreshold" value="2000" min="1" />
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:10px;">
+          <div>
+            <label for="memo">メモ</label>
+            <textarea id="memo" placeholder="例: 金属くず多め / 急ぎ案件 / joint対象"></textarea>
+          </div>
+          <div>
+            <div class="help-note" style="margin-top:26px;">
+              画面を左右に割らず、素材表を広く使う実務版です。<br>
+              ボーナス対象、joint対象、ボーナス個数、joint個数は素材ごとに個別設定です。<br>
+              例: 2000で30個、4000で60個のように倍数計算されます。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">素材計算</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th class="sticky-col">素材</th>
+                <th>数量</th>
+                <th>単価</th>
+                <th>状態</th>
+                <th>ボーナス対象</th>
+                <th>joint対象</th>
+                <th>ボーナス個数</th>
+                <th>joint個数</th>
+                <th>小計</th>
+                <th>ボーナス</th>
+                <th>joint</th>
+              </tr>
+            </thead>
+            <tbody id="materials-body"></tbody>
+          </table>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-box">
+            <div class="summary-title">今回の小計</div>
+            <div class="summary-value"><span id="subtotal">0</span> 円</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">今回のボーナス</div>
+            <div class="summary-value"><span id="bonusTotal">0</span> 個</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">今回のjoint</div>
+            <div class="summary-value"><span id="jointTotal">0</span> 個</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">今回の合計</div>
+            <div class="summary-value main"><span id="grandTotal">0</span> 円</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">履歴10件総合計</div>
+            <div class="summary-value"><span id="historyGrandTotal">0</span> 円</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">joint判定</div>
+            <div class="summary-value" id="jointStatus">対象外</div>
+          </div>
+          <div class="summary-box">
+            <div class="summary-title">停止素材数</div>
+            <div class="summary-value" id="stoppedCount">0</div>
+          </div>
+        </div>
+
+        <div class="detail-layout">
+          <div>
+            <label for="summaryInlineText">コピペ用明細</label>
+            <textarea id="summaryInlineText" class="summary-inline-textarea" readonly></textarea>
+          </div>
+
+          <div class="side-buttons no-print">
+            <button class="main-btn btn-save" onclick="saveHistory()">この内容を履歴に保存</button>
+            <button class="main-btn btn-copy" onclick="copyInlineSummary()">明細をコピー</button>
+            <button class="main-btn btn-print" onclick="window.print()">印刷</button>
+            <button class="main-btn btn-copy" onclick="downloadCSV()">CSV出力</button>
+            <button class="main-btn btn-reset" onclick="resetInputs()">入力をリセット</button>
+            <button class="main-btn btn-delete" onclick="deleteAllHistory()">履歴を全削除</button>
+            <button class="main-btn btn-delete" onclick="deleteRankingData()">ランキングを全削除</button>
+            <button class="main-btn btn-lock" onclick="lockApp()">ロック</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2 class="section-title">日別 / 週別 / 月別 集計</h2>
+          <div class="grid-3">
+            <div class="mini-box">
+              <h3 class="mini-box-title">今日</h3>
+              <div class="big-stat" id="todayTotal">0円</div>
+              <div class="muted">件数: <span id="todayCount">0</span></div>
+            </div>
+            <div class="mini-box">
+              <h3 class="mini-box-title">今週</h3>
+              <div class="big-stat" id="weekTotal">0円</div>
+              <div class="muted">件数: <span id="weekCount">0</span></div>
+            </div>
+            <div class="mini-box">
+              <h3 class="mini-box-title">今月</h3>
+              <div class="big-stat" id="monthTotal">0円</div>
+              <div class="muted">件数: <span id="monthCount">0</span></div>
+            </div>
+          </div>
+          <div class="mini-box" style="margin-top:10px;">
+            <h3 class="mini-box-title">最新取引先</h3>
+            <div class="big-stat" id="latestCustomer" style="font-size:18px;">-</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">ランキング</h2>
+          <div class="mini-box">
+            <h3 class="mini-box-title">素材持ち込みランキング</h3>
+            <ol class="rank-list" id="materialRanking">
+              <li>まだデータがありません</li>
+            </ol>
+          </div>
+          <div class="mini-box" style="margin-top:10px;">
+            <h3 class="mini-box-title">業者ランキング</h3>
+            <ol class="rank-list" id="customerRanking">
+              <li>まだデータがありません</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">買取履歴（最新10件）</h2>
+        <div id="historyList" class="history-list"></div>
+      </div>
+    
+      </section>
+
+
+      <section id="gangPage" class="app-page">
+        <div class="nav-row no-print">
+          <button class="nav-btn" onclick="showPage('homePage')">ホームへ戻る</button>
+          <button class="nav-btn purple" onclick="lockApp()">ロック</button>
+        </div>
+        <div class="card global-top">
+          <h2 class="page-title">ギャングカラー検索＆作業カウンター</h2>
+          <div class="page-desc">ギャング名や色名でカラー情報を検索できます。あわせて修理と色替えの台数も同じ画面で記録できます。作業カウンターはホームに戻っても消えません。</div>
+        </div>
+        <div class="gang-grid">
+          <div class="gang-layout">
+            <div class="card">
+              <h2 class="section-title">ギャングカラー検索</h2>
+              <div class="page-desc">ギャング名、色名、別名、略称で検索できます。</div>
+              <div class="search-row2">
+                <input id="gangSearchInput" type="text" placeholder="例：Fisher / 青 / オレンジ / 半グレ / パープル" />
+                <button class="main-btn btn-copy" onclick="searchGangData()">検索</button>
+              </div>
+              <div class="quick-row" id="gangQuickButtons"></div>
+              <div id="gangResult" class="gang-result"><div class="empty-note">ここに検索結果が表示されます。</div></div>
+            </div>
+            <div class="card">
+              <h2 class="section-title">共有ギャングデータ</h2>
+              <div class="page-desc">この版では、ギャングデータは <code>gang-data.json</code> から読み込みます。一般ユーザーは閲覧専用で、更新は管理者が JSON を書き換えて GitHub に反映します。</div>
+              <div class="panel">
+                <div class="muted-inline">更新方法</div>
+                <div style="line-height:1.8; margin-top:8px;">
+                  1. <code>gang-data.json</code> を編集<br>
+                  2. GitHub にアップロード<br>
+                  3. ページ再読み込みで全員に反映
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="section-title">共有ギャング一覧</h2>
+              <div id="gangRegistryList" class="registry-list"></div>
+            </div>
+          </div>
+          <div class="gang-layout">
+            <div class="card">
+              <h2 class="section-title">作業カウンター</h2>
+              <div class="page-desc">1台ごとのか所数で記録します。修理と色替えは別物で保存されます。</div>
+              <div class="panel">
+                <div class="registry-head"><h3>修理台数を記録</h3><div class="muted-inline">1台ごとの修理か所数</div></div>
+                <div class="counter-grid" id="repairCounterButtons"><button class="counter-btn" onclick="addWorkCount('repair', 1)">1</button><button class="counter-btn" onclick="addWorkCount('repair', 2)">2</button><button class="counter-btn" onclick="addWorkCount('repair', 3)">3</button><button class="counter-btn" onclick="addWorkCount('repair', 4)">4</button><button class="counter-btn" onclick="addWorkCount('repair', 5)">5</button><button class="counter-btn" onclick="addWorkCount('repair', 6)">6</button><button class="counter-btn" onclick="addWorkCount('repair', 7)">7</button><button class="counter-btn" onclick="addWorkCount('repair', 8)">8</button></div>
+              </div>
+              <div class="panel" style="margin-top:12px;">
+                <div class="registry-head"><h3>色替え台数を記録</h3><div class="muted-inline">1台ごとの色替えか所数</div></div>
+                <div class="counter-grid" id="paintCounterButtons"><button class="counter-btn" onclick="addWorkCount('paint', 1)">1</button><button class="counter-btn" onclick="addWorkCount('paint', 2)">2</button><button class="counter-btn" onclick="addWorkCount('paint', 3)">3</button><button class="counter-btn" onclick="addWorkCount('paint', 4)">4</button></div>
+              </div>
+              <div class="summary-split" style="margin-top:12px;">
+                <div class="panel"><h3>修理 内訳</h3><div id="repairSummaryRows"></div></div>
+                <div class="panel"><h3>色替え 内訳</h3><div id="paintSummaryRows"></div></div>
+              </div>
+              <div class="stat-grid2" style="margin-top:12px;">
+                <div class="stat-box2"><div class="label">修理台数 合計</div><div class="value" id="repairCarsCount">0</div></div>
+                <div class="stat-box2"><div class="label">色替え台数 合計</div><div class="value" id="paintCarsCount">0</div></div>
+                <div class="stat-box2"><div class="label">総作業台数 合計</div><div class="value" id="allCarsCount">0</div></div>
+              </div>
+              <div class="stat-grid2" style="margin-top:12px;">
+                <div class="stat-box2"><div class="label">修理か所数 合計</div><div class="value" id="repairPointsCount">0</div></div>
+                <div class="stat-box2"><div class="label">色替えか所数 合計</div><div class="value" id="paintPointsCount">0</div></div>
+                <div class="stat-box2"><div class="label">総か所数 合計</div><div class="value" id="allPointsCount">0</div></div>
+              </div>
+            </div>
+            <div class="card">
+              <h2 class="section-title">作業履歴</h2>
+              <div class="history-box" id="workHistoryList"></div>
+              <div class="toolbar2 no-print">
+                <button class="small-btn" onclick="undoWorkHistory()">ひとつ戻す</button>
+                <button class="danger-btn" onclick="resetRepairCounts()">修理だけリセット</button>
+                <button class="danger-btn" onclick="resetPaintCounts()">色替えだけリセット</button>
+                <button class="danger-btn" onclick="resetAllWorkCounts()">作業カウンター全リセット</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <script>
+    const APP_VERSION = "Ver.2026-03-22-FW3.2";
+
+    const materials = [
+      { key: "iron", name: "鉄", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "aluminum", name: "アルミ", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "cloth", name: "布", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "scrap", name: "金属くず", price: 4000, stopped: false, bonusEnabled: true, jointEnabled: true, bonusAmount: 30, jointAmount: 30 },
+      { key: "glass", name: "ガラス", price: 4000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "copper", name: "銅", price: 4000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "steel", name: "鋼鉄", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "plastic", name: "プラスチック", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 },
+      { key: "rubber", name: "ゴム", price: 2000, stopped: false, bonusEnabled: true, jointEnabled: false, bonusAmount: 30, jointAmount: 30 }
+    ];
+
+    const HISTORY_KEY = "naniwa_motor_complete_history_fw32";
+    const SETTINGS_KEY = "naniwa_motor_settings_fw32";
+    const PASSCODE_KEY = "naniwa_motor_passcode_fw32";
+    const RANKING_KEY = "naniwa_motor_ranking_fw32";
+    const COPIED_HISTORY_KEY = "naniwa_motor_copied_history_fw32";
+
+    function formatNumber(num) {
+      return Number(num || 0).toLocaleString("ja-JP");
+    }
+
+    function getNowString() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      const h = String(now.getHours()).padStart(2, "0");
+      const mi = String(now.getMinutes()).padStart(2, "0");
+      const s = String(now.getSeconds()).padStart(2, "0");
+      return `${y}/${m}/${d} ${h}:${mi}:${s}`;
+    }
+
+    function getDateKey(date = new Date()) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      return `${y}/${m}/${d}`;
+    }
+
+    function getTodayKey() {
+      return getDateKey(new Date());
+    }
+
+    function getWeekStart(d = new Date()) {
+      const date = new Date(d);
+      const day = date.getDay();
+      const diff = day === 0 ? -6 : 1 - day;
+      date.setDate(date.getDate() + diff);
+      date.setHours(0, 0, 0, 0);
+      return date;
+    }
+
+    function getMonthStart(d = new Date()) {
+      const date = new Date(d.getFullYear(), d.getMonth(), 1);
+      date.setHours(0, 0, 0, 0);
+      return date;
+    }
+
+    function saveSettings() {
+      const settings = {
+        stopped: {},
+        bonusTarget: {},
+        jointTarget: {},
+        bonusAmount: {},
+        jointAmount: {},
+        prices: {}
+      };
+
+      materials.forEach((material) => {
+        settings.stopped[material.key] = document.getElementById(`${material.key}_stopped`)?.checked ?? material.stopped;
+        settings.bonusTarget[material.key] = document.getElementById(`${material.key}_bonus_enabled`)?.checked ?? material.bonusEnabled;
+        settings.jointTarget[material.key] = document.getElementById(`${material.key}_joint_enabled`)?.checked ?? material.jointEnabled;
+        settings.bonusAmount[material.key] = Number(document.getElementById(`${material.key}_bonus_amount`)?.value ?? material.bonusAmount) || material.bonusAmount;
+        settings.jointAmount[material.key] = Number(document.getElementById(`${material.key}_joint_amount`)?.value ?? material.jointAmount) || material.jointAmount;
+        settings.prices[material.key] = Number(document.getElementById(`${material.key}_price`)?.value ?? material.price) || material.price;
+      });
+
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    }
+
+    function loadSettings() {
+      const raw = localStorage.getItem(SETTINGS_KEY);
+      if (!raw) return;
+
+      try {
+        const settings = JSON.parse(raw);
+
+        materials.forEach((m) => {
+          if (settings.stopped && typeof settings.stopped[m.key] === "boolean") m.stopped = settings.stopped[m.key];
+          if (settings.bonusTarget && typeof settings.bonusTarget[m.key] === "boolean") m.bonusEnabled = settings.bonusTarget[m.key];
+          if (settings.jointTarget && typeof settings.jointTarget[m.key] === "boolean") m.jointEnabled = settings.jointTarget[m.key];
+          if (settings.bonusAmount && settings.bonusAmount[m.key] !== undefined) m.bonusAmount = Number(settings.bonusAmount[m.key]) || m.bonusAmount;
+          if (settings.jointAmount && settings.jointAmount[m.key] !== undefined) m.jointAmount = Number(settings.jointAmount[m.key]) || m.jointAmount;
+          if (settings.prices && settings.prices[m.key] !== undefined) m.price = Number(settings.prices[m.key]) || m.price;
+        });
+      } catch (e) {}
+    }
+
+    function getSavedPasscode() {
+      return localStorage.getItem(PASSCODE_KEY) || "7000";
+    }
+
+    function unlockApp() {
+      const input = document.getElementById("unlockCode").value.trim();
+      if (input !== getSavedPasscode()) {
+        alert("パスコードが違います。");
+        return;
+      }
+      document.getElementById("lockWrapper").classList.add("hidden");
+      document.getElementById("appWrapper").classList.remove("hidden");
+      calc();
+      renderHistory();
+    }
+
+    function lockApp() {
+      document.getElementById("appWrapper").classList.add("hidden");
+      document.getElementById("lockWrapper").classList.remove("hidden");
+      document.getElementById("unlockCode").value = "";
+    }
+
+    function changePasscode() {
+      const currentInput = document.getElementById("unlockCode").value.trim();
+      if (currentInput && currentInput !== getSavedPasscode()) {
+        alert("現在入力中のパスコードが違います。");
+        return;
+      }
+      const newCode = prompt("新しいパスコードを入力してください", getSavedPasscode());
+      if (!newCode) return;
+      localStorage.setItem(PASSCODE_KEY, newCode);
+      alert("パスコードを変更しました。");
+    }
+
+    function changeQty(key, diff) {
+      const input = document.getElementById(key);
+      if (!input) return;
+      const current = Number(input.value) || 0;
+      input.value = Math.max(0, current + diff);
+      calc();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById("materials-body");
+      tbody.innerHTML = "";
+
+      materials.forEach((material) => {
+        const tr = document.createElement("tr");
+        tr.id = `${material.key}_row`;
+        tr.innerHTML = `
+          <td class="material-name sticky-col">${material.name}<br><span style="font-size:12px;color:#93b9a4;">key:${material.key}</span></td>
+          <td>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" onclick="changeQty('${material.key}', -1)">-</button>
+              <input type="number" min="0" value="0" id="${material.key}" class="qty-input" oninput="calc()" />
+              <button type="button" class="qty-btn" onclick="changeQty('${material.key}', 1)">+</button>
+            </div>
+          </td>
+          <td><input type="number" min="0" value="${material.price}" id="${material.key}_price" class="price-input" oninput="onSettingsChange()" /></td>
+          <td>
+            <label style="display:flex;align-items:center;justify-content:center;gap:8px;margin:0;">
+              <input type="checkbox" id="${material.key}_stopped" ${material.stopped ? "checked" : ""} onchange="onSettingsChange()" />
+              <span class="${material.stopped ? "stop-badge" : "ok-badge"}" id="${material.key}_status_badge">${material.stopped ? "停止中" : "買取中"}</span>
+            </label>
+          </td>
+          <td><div class="cell-check"><input type="checkbox" id="${material.key}_bonus_enabled" ${material.bonusEnabled ? "checked" : ""} onchange="onSettingsChange()" /></div></td>
+          <td><div class="cell-check"><input type="checkbox" id="${material.key}_joint_enabled" ${material.jointEnabled ? "checked" : ""} onchange="onSettingsChange()" /></div></td>
+          <td><input type="number" min="0" value="${material.bonusAmount}" id="${material.key}_bonus_amount" class="small-input" oninput="onSettingsChange()" /></td>
+          <td><input type="number" min="0" value="${material.jointAmount}" id="${material.key}_joint_amount" class="small-input" oninput="onSettingsChange()" /></td>
+          <td id="${material.key}_subtotal" class="result-cell subtotal-cell">0</td>
+          <td id="${material.key}_bonus" class="result-cell bonus-cell">0</td>
+          <td id="${material.key}_joint" class="result-cell joint-cell">0</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function onSettingsChange() {
+      saveSettings();
+      calc();
+    }
+
+    function getCalcData() {
+      const bonusThreshold = Number(document.getElementById("bonusThreshold").value) || 1;
+      const jointThreshold = Number(document.getElementById("jointThreshold").value) || 1;
+
+      let subtotal = 0;
+      let bonusTotal = 0;
+      let jointTotal = 0;
+      let jointEligible = false;
+      let stoppedCount = 0;
+      const details = [];
+
+      materials.forEach((material) => {
+        const row = document.getElementById(`${material.key}_row`);
+        const qty = Number(document.getElementById(material.key).value) || 0;
+        const unitPrice = Number(document.getElementById(`${material.key}_price`).value) || 0;
+        const stopped = document.getElementById(`${material.key}_stopped`).checked;
+        const bonusEnabled = document.getElementById(`${material.key}_bonus_enabled`).checked;
+        const jointEnabled = document.getElementById(`${material.key}_joint_enabled`).checked;
+        const itemBonusAmount = Number(document.getElementById(`${material.key}_bonus_amount`).value) || 0;
+        const itemJointAmount = Number(document.getElementById(`${material.key}_joint_amount`).value) || 0;
+
+        const itemSubtotal = stopped ? 0 : qty * unitPrice;
+
+        let itemBonus = 0;
+        if (!stopped && bonusEnabled && qty >= bonusThreshold) {
+          const times = Math.floor(qty / bonusThreshold);
+          itemBonus = times * itemBonusAmount;
+        }
+
+        let itemJoint = 0;
+        if (!stopped && jointEnabled && qty >= jointThreshold) {
+          const times = Math.floor(qty / jointThreshold);
+          itemJoint = times * itemJointAmount;
+          if (itemJoint > 0) jointEligible = true;
+        }
+
+        if (stopped) stoppedCount++;
+
+        subtotal += itemSubtotal;
+        bonusTotal += itemBonus;
+        jointTotal += itemJoint;
+
+        const badge = document.getElementById(`${material.key}_status_badge`);
+        badge.textContent = stopped ? "停止中" : "買取中";
+        badge.className = stopped ? "stop-badge" : "ok-badge";
+
+        document.getElementById(`${material.key}_subtotal`).innerText = formatNumber(itemSubtotal);
+        document.getElementById(`${material.key}_bonus`).innerText = formatNumber(itemBonus);
+        document.getElementById(`${material.key}_joint`).innerText = formatNumber(itemJoint);
+
+        row.classList.toggle("active-row", qty > 0 && !stopped);
+        row.classList.toggle("stopped-row", stopped);
+
+        if (qty > 0) {
+          details.push({
+            name: material.name,
+            key: material.key,
+            qty,
+            unitPrice,
+            subtotal: itemSubtotal,
+            bonus: itemBonus,
+            joint: itemJoint,
+            bonusEnabled,
+            jointEnabled,
+            stopped
+          });
+        }
+      });
+
+      return {
+        subtotal,
+        bonusTotal,
+        jointTotal,
+        grandTotal: subtotal,
+        details,
+        jointEligible,
+        stoppedCount
+      };
+    }
+
+    function buildSummaryText() {
+      const staffName = document.getElementById("staffName").value.trim();
+      const customerName = document.getElementById("customerName").value.trim();
+      const memo = document.getElementById("memo").value.trim();
+      const calcData = getCalcData();
+
+      const lines = [];
+      lines.push(`【なにわモーター 素材買取明細 / ${APP_VERSION}】`);
+      if (staffName) lines.push(`担当: ${staffName}`);
+      if (customerName) lines.push(`相手: ${customerName}`);
+      lines.push("");
+
+      if (calcData.details.length === 0) {
+        lines.push("素材入力なし");
+      } else {
+        calcData.details.forEach((item) => {
+          let line = `・${item.name} ${formatNumber(item.qty)}個 × ${formatNumber(item.unitPrice)}円 = ${formatNumber(item.subtotal)}円`;
+          if (item.stopped) line += " / 買取停止";
+          if (!item.stopped && item.bonus > 0) line += ` / ボーナス ${formatNumber(item.bonus)}個`;
+          if (!item.stopped && item.joint > 0) line += ` / joint ${formatNumber(item.joint)}個`;
+          lines.push(line);
+        });
+      }
+
+      lines.push("");
+      lines.push(`小計: ${formatNumber(calcData.subtotal)}円`);
+      lines.push(`ボーナス: ${formatNumber(calcData.bonusTotal)}個`);
+      lines.push(`joint: ${formatNumber(calcData.jointTotal)}個`);
+      lines.push(`合計: ${formatNumber(calcData.grandTotal)}円`);
+      lines.push(`joint判定: ${calcData.jointEligible ? "対象" : "対象外"}`);
+
+      if (memo) {
+        lines.push("");
+        lines.push(`メモ: ${memo}`);
+      }
+
+      return lines.join("\n");
+    }
+
+    function buildHistoryCopyText(record) {
+      const lines = [];
+      lines.push(`【なにわモーター 素材買取明細 / ${record.version || APP_VERSION}】`);
+      if (record.staffName) lines.push(`担当: ${record.staffName}`);
+      if (record.customerName) lines.push(`相手: ${record.customerName}`);
+      lines.push("");
+
+      if (!record.details || record.details.length === 0) {
+        lines.push("素材入力なし");
+      } else {
+        record.details.forEach((item) => {
+          let line = `・${item.name} ${formatNumber(item.qty)}個 × ${formatNumber(item.unitPrice)}円 = ${formatNumber(item.subtotal)}円`;
+          if (item.stopped) line += " / 買取停止";
+          if (!item.stopped && item.bonus > 0) line += ` / ボーナス ${formatNumber(item.bonus)}個`;
+          if (!item.stopped && item.joint > 0) line += ` / joint ${formatNumber(item.joint)}個`;
+          lines.push(line);
+        });
+      }
+
+      lines.push("");
+      lines.push(`小計: ${formatNumber(record.subtotal)}円`);
+      lines.push(`ボーナス: ${formatNumber(record.bonusTotal)}個`);
+      lines.push(`joint: ${formatNumber(record.jointTotal)}個`);
+      lines.push(`合計: ${formatNumber(record.grandTotal)}円`);
+      lines.push(`joint判定: ${record.jointEligible ? "対象" : "対象外"}`);
+
+      if (record.memo) {
+        lines.push("");
+        lines.push(`メモ: ${record.memo}`);
+      }
+
+      return lines.join("\n");
+    }
+
+    function syncInlineSummary() {
+      const area = document.getElementById("summaryInlineText");
+      if (area) area.value = buildSummaryText();
+    }
+
+    function loadHistory() {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      if (!raw) return [];
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveHistoryToStorage(history) {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    function loadRankingData() {
+      const raw = localStorage.getItem(RANKING_KEY);
+      if (!raw) return { materialTotals: {}, customerTotals: {} };
+      try {
+        const parsed = JSON.parse(raw);
+        return {
+          materialTotals: parsed.materialTotals || {},
+          customerTotals: parsed.customerTotals || {}
+        };
+      } catch (e) {
+        return { materialTotals: {}, customerTotals: {} };
+      }
+    }
+
+    function saveRankingData(data) {
+      localStorage.setItem(RANKING_KEY, JSON.stringify(data));
+    }
+
+    function updateRankingDataFromRecord(record) {
+      const ranking = loadRankingData();
+      const customer = record.customerName || "名無し";
+      ranking.customerTotals[customer] = (ranking.customerTotals[customer] || 0) + (Number(record.grandTotal) || 0);
+
+      record.details.forEach((item) => {
+        ranking.materialTotals[item.name] = (ranking.materialTotals[item.name] || 0) + (Number(item.qty) || 0);
+      });
+
+      saveRankingData(ranking);
+    }
+
+    function deleteRankingData() {
+      const ok = confirm("ランキングデータをすべて削除します。よろしいですか？");
+      if (!ok) return;
+      localStorage.removeItem(RANKING_KEY);
+      renderRankings();
+    }
+
+    function loadCopiedHistoryIds() {
+      const raw = localStorage.getItem(COPIED_HISTORY_KEY);
+      if (!raw) return [];
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCopiedHistoryIds(ids) {
+      localStorage.setItem(COPIED_HISTORY_KEY, JSON.stringify(ids));
+    }
+
+    function markHistoryCopied(id) {
+      const ids = loadCopiedHistoryIds();
+      if (!ids.includes(id)) {
+        ids.push(id);
+        saveCopiedHistoryIds(ids);
+      }
+    }
+
+    function markLatestHistoryCopied() {
+      const history = loadHistory();
+      if (!history || history.length === 0) return;
+      markHistoryCopied(history[0].id);
+    }
+
+    function isHistoryCopied(id) {
+      return loadCopiedHistoryIds().includes(id);
+    }
+
+    async function copyInlineSummary() {
+      try {
+        await navigator.clipboard.writeText(buildSummaryText());
+        markLatestHistoryCopied();
+        renderHistory();
+        alert(`${APP_VERSION} の明細をコピーしました。`);
+      } catch (e) {
+        alert("コピーに失敗しました。");
+      }
+    }
+
+    async function copyHistoryItem(id) {
+      const history = loadHistory();
+      const record = history.find(item => item.id === id);
+      if (!record) {
+        alert("履歴が見つかりません。");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(buildHistoryCopyText(record));
+        markHistoryCopied(id);
+        renderHistory();
+      } catch (e) {
+        alert("コピーに失敗しました。");
+      }
+    }
+
+    function calc() {
+      const data = getCalcData();
+      document.getElementById("subtotal").innerText = formatNumber(data.subtotal);
+      document.getElementById("bonusTotal").innerText = formatNumber(data.bonusTotal);
+      document.getElementById("jointTotal").innerText = formatNumber(data.jointTotal);
+      document.getElementById("grandTotal").innerText = formatNumber(data.grandTotal);
+      document.getElementById("jointStatus").innerText = data.jointEligible ? "対象" : "対象外";
+      document.getElementById("stoppedCount").innerText = formatNumber(data.stoppedCount);
+      syncInlineSummary();
+      saveSettings();
+    }
+
+    function saveHistory() {
+      const staffName = document.getElementById("staffName").value.trim();
+      const customerName = document.getElementById("customerName").value.trim();
+      const memo = document.getElementById("memo").value.trim();
+      const calcData = getCalcData();
+
+      if (calcData.details.length === 0 || calcData.grandTotal <= 0) {
+        alert("数量が入力されていません。");
+        return;
+      }
+
+      const record = {
+        id: Date.now(),
+        datetime: getNowString(),
+        dateKey: getTodayKey(),
+        version: APP_VERSION,
+        staffName,
+        customerName,
+        memo,
+        subtotal: calcData.subtotal,
+        bonusTotal: calcData.bonusTotal,
+        jointTotal: calcData.jointTotal,
+        grandTotal: calcData.grandTotal,
+        jointEligible: calcData.jointEligible,
+        details: calcData.details
+      };
+
+      const history = loadHistory();
+      history.unshift(record);
+      if (history.length > 10) history.length = 10;
+
+      saveHistoryToStorage(history);
+      updateRankingDataFromRecord(record);
+      renderHistory();
+      alert(`${APP_VERSION} で履歴を保存しました。`);
+    }
+
+    function deleteHistoryItem(id) {
+      const ok = confirm("この履歴を削除します。よろしいですか？");
+      if (!ok) return;
+
+      const history = loadHistory().filter(item => item.id !== id);
+      saveHistoryToStorage(history);
+
+      const copiedIds = loadCopiedHistoryIds().filter(item => item !== id);
+      saveCopiedHistoryIds(copiedIds);
+
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const history = loadHistory();
+      const historyList = document.getElementById("historyList");
+      historyList.innerHTML = "";
+
+      let historyGrandTotal = 0;
+
+      if (history.length === 0) {
+        historyList.innerHTML = `<div class="empty">まだ履歴はありません。</div>`;
+      } else {
+        history.forEach((record, index) => {
+          historyGrandTotal += Number(record.grandTotal) || 0;
+
+          const detailText = (record.details || []).map((item) => {
+            let t = `${item.name}: ${formatNumber(item.qty)}個 × ${formatNumber(item.unitPrice)}円 = ${formatNumber(item.subtotal)}円`;
+            if (item.stopped) t += " / 買取停止";
+            if (!item.stopped && item.bonus > 0) t += ` / ボーナス ${formatNumber(item.bonus)}個`;
+            if (!item.stopped && item.joint > 0) t += ` / joint ${formatNumber(item.joint)}個`;
+            return t;
+          }).join(" / ");
+
+          const nameParts = [];
+          if (record.staffName) nameParts.push(`担当 ${record.staffName}`);
+          if (record.customerName) nameParts.push(`相手 ${record.customerName}`);
+          const nameLine = nameParts.length ? nameParts.join(" / ") : "担当・相手未入力";
+
+          const copied = isHistoryCopied(record.id);
+
+          const div = document.createElement("div");
+          div.className = "history-item";
+          div.innerHTML = `
+            <div class="history-top">
+              <div>${index + 1}件目 / ${record.version || APP_VERSION}</div>
+              <div>${record.datetime}</div>
+            </div>
+            <div class="history-name">${nameLine}</div>
+            <div class="history-total">${formatNumber(record.grandTotal)} 円</div>
+            <div class="history-detail">${detailText}</div>
+            <div class="history-memo">ボーナス: ${formatNumber(record.bonusTotal)}個 / joint: ${formatNumber(record.jointTotal)}個 / joint判定: ${record.jointEligible ? "対象" : "対象外"}</div>
+            ${record.memo ? `<div class="history-memo">メモ: ${record.memo}</div>` : ""}
+            <div class="history-actions no-print">
+              <button class="main-btn btn-copy" style="width:auto;" onclick="copyHistoryItem(${record.id})">この履歴をコピー</button>
+              <span class="copied-badge ${copied ? "show" : ""}">コピー済み</span>
+              <button class="main-btn btn-delete" style="width:auto;" onclick="deleteHistoryItem(${record.id})">この履歴を削除</button>
+            </div>
+          `;
+          historyList.appendChild(div);
+        });
+      }
+
+      document.getElementById("historyGrandTotal").innerText = formatNumber(historyGrandTotal);
+      renderPeriodStats(history);
+      renderRankings();
+    }
+
+    function renderPeriodStats(history) {
+      const todayKey = getTodayKey();
+      const weekStart = getWeekStart();
+      const monthStart = getMonthStart();
+      const now = new Date();
+
+      const parseRecordDate = (record) => {
+        const safe = String(record.datetime || "").replace(/\//g, "-");
+        const parsed = new Date(safe);
+        return isNaN(parsed.getTime()) ? new Date() : parsed;
+      };
+
+      const todayHistory = history.filter(item => item.dateKey === todayKey);
+      const weekHistory = history.filter(item => parseRecordDate(item) >= weekStart);
+      const monthHistory = history.filter(item => {
+        const d = parseRecordDate(item);
+        return d >= monthStart && d <= now;
+      });
+
+      const todayTotal = todayHistory.reduce((sum, item) => sum + (Number(item.grandTotal) || 0), 0);
+      const weekTotal = weekHistory.reduce((sum, item) => sum + (Number(item.grandTotal) || 0), 0);
+      const monthTotal = monthHistory.reduce((sum, item) => sum + (Number(item.grandTotal) || 0), 0);
+      const latestCustomer = history.length > 0 ? (history[0].customerName || "-") : "-";
+
+      document.getElementById("todayCount").innerText = formatNumber(todayHistory.length);
+      document.getElementById("todayTotal").innerText = `${formatNumber(todayTotal)}円`;
+      document.getElementById("weekCount").innerText = formatNumber(weekHistory.length);
+      document.getElementById("weekTotal").innerText = `${formatNumber(weekTotal)}円`;
+      document.getElementById("monthCount").innerText = formatNumber(monthHistory.length);
+      document.getElementById("monthTotal").innerText = `${formatNumber(monthTotal)}円`;
+      document.getElementById("latestCustomer").innerText = latestCustomer;
+    }
+
+    function renderRankings() {
+      const ranking = loadRankingData();
+      const materialRanking = Object.entries(ranking.materialTotals)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      const customerRanking = Object.entries(ranking.customerTotals)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      document.getElementById("materialRanking").innerHTML =
+        materialRanking.length === 0
+          ? "<li>まだデータがありません</li>"
+          : materialRanking.map(([name, qty]) => `<li>${name} - ${formatNumber(qty)}個</li>`).join("");
+
+      document.getElementById("customerRanking").innerHTML =
+        customerRanking.length === 0
+          ? "<li>まだデータがありません</li>"
+          : customerRanking.map(([name, total]) => `<li>${name} - ${formatNumber(total)}円</li>`).join("");
+    }
+
+    function downloadCSV() {
+      const history = loadHistory();
+      if (history.length === 0) {
+        alert("CSVに出す履歴がありません。");
+        return;
+      }
+
+      const rows = [
+        ["版", "日時", "担当", "相手", "小計(円)", "ボーナス(個)", "joint(個)", "合計(円)", "joint判定", "メモ", "内訳"]
+      ];
+
+      history.forEach(record => {
+        const details = (record.details || []).map(item => {
+          let t = `${item.name}:${item.qty}個×${item.unitPrice}円=${item.subtotal}円`;
+          if (item.stopped) t += "(停止)";
+          if (item.bonus > 0) t += `+ボーナス${item.bonus}個`;
+          if (item.joint > 0) t += `+joint${item.joint}個`;
+          return t;
+        }).join(" / ");
+
+        rows.push([
+          record.version || APP_VERSION,
+          record.datetime,
+          record.staffName || "",
+          record.customerName || "",
+          record.subtotal,
+          record.bonusTotal,
+          record.jointTotal,
+          record.grandTotal,
+          record.jointEligible ? "対象" : "対象外",
+          record.memo || "",
+          details
+        ]);
+      });
+
+      const csv = rows.map(row =>
+        row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(",")
+      ).join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `naniwa_motor_history_fw32_${Date.now()}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function resetInputs() {
+      document.getElementById("staffName").value = "";
+      document.getElementById("customerName").value = "";
+      document.getElementById("memo").value = "";
+      document.getElementById("bonusThreshold").value = 2000;
+      document.getElementById("jointThreshold").value = 2000;
+
+      materials.forEach((material) => {
+        document.getElementById(material.key).value = 0;
+        document.getElementById(`${material.key}_price`).value = material.price;
+        document.getElementById(`${material.key}_stopped`).checked = material.stopped;
+        document.getElementById(`${material.key}_bonus_enabled`).checked = material.bonusEnabled;
+        document.getElementById(`${material.key}_joint_enabled`).checked = material.jointEnabled;
+        document.getElementById(`${material.key}_bonus_amount`).value = material.bonusAmount;
+        document.getElementById(`${material.key}_joint_amount`).value = material.jointAmount;
+      });
+
+      calc();
+    }
+
+    function deleteAllHistory() {
+      const ok = confirm("履歴をすべて削除します。よろしいですか？");
+      if (!ok) return;
+      localStorage.removeItem(HISTORY_KEY);
+      localStorage.removeItem(COPIED_HISTORY_KEY);
+      renderHistory();
+    }
+
+    loadSettings();
+    renderTable();
+    calc();
+    renderRankings();
+
+    document.getElementById("unlockCode").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") unlockApp();
+    });
+
+    document.getElementById("staffName").addEventListener("input", calc);
+    document.getElementById("customerName").addEventListener("input", calc);
+    document.getElementById("memo").addEventListener("input", calc);
+    document.getElementById("bonusThreshold").addEventListener("input", calc);
+    document.getElementById("jointThreshold").addEventListener("input", calc);
+  
+
+
+    function showPage(pageId) {
+      document.querySelectorAll('.app-page').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active');
+    }
+
+    const GANG_JSON_URL = 'gang-data.json';
+    let sharedGangData = [];
+
+    const defaultGangData = [
+      {
+        id: 'default-fisher',
+        name: 'Fisher（青ギャング）',
+        primary: 'アノダイズドブルー（カメレオン）',
+        secondary: 'ブルー系',
+        pearl: 'お好みで設定',
+        wheel: 'お好みで設定',
+        keywords: ['fisher','フィッシャー','青','ブルー','blue','青ギャング']
+      },
+      {
+        id: 'default-orange',
+        name: 'オレンジギャング',
+        primary: 'オレンジ（マット）',
+        secondary: 'オレンジ系',
+        pearl: 'お好みで設定',
+        wheel: 'お好みで設定',
+        keywords: ['オレンジ','orange','橙','オレンジギャング']
+      },
+      {
+        id: 'default-hangure',
+        name: 'lvy半グレ / まっくろくろす',
+        primary: 'アノダイズドパープル（カメレオン）',
+        secondary: 'パープル系',
+        pearl: 'お好みで設定',
+        wheel: 'お好みで設定',
+        keywords: ['lvy','半グレ','半ぐれ','まっくろくろす','紫','パープル','purple']
+      }
+    ];
+
+    const WORK_STORAGE_KEY = 'naniwa_motor_work_counter_v5';
+    let workState = loadWorkState();
+
+    function normalizeText(value) {
+      return String(value || '').trim().toLowerCase().replace(/\s+/g, '');
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    async function loadGangRegistry() {
+      try {
+        const res = await fetch(`${GANG_JSON_URL}?v=${Date.now()}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('JSON format error');
+        sharedGangData = data.map((item, idx) => ({
+          id: item.id || `gang-json-${idx + 1}`,
+          name: item.name || '',
+          primary: item.primary || '',
+          secondary: item.secondary || '',
+          pearl: item.pearl || '',
+          wheel: item.wheel || '',
+          keywords: Array.isArray(item.keywords) ? item.keywords : []
+        }));
+      } catch (e) {
+        console.warn('gang-data.json の読み込みに失敗したため初期データを使用します', e);
+        sharedGangData = [...defaultGangData];
+      }
+      renderGangRegistryList();
+      renderGangQuickButtons();
+      const input = document.getElementById('gangSearchInput');
+      if (input && input.value.trim()) searchGangData();
+    }
+
+    function getGangRegistry() {
+      return sharedGangData.length ? sharedGangData : [...defaultGangData];
+    }
+
+    function fillGangSearch(word) {
+      document.getElementById('gangSearchInput').value = word;
+      searchGangData();
+    }
+
+    function renderGangQuickButtons() {
+      const wrap = document.getElementById('gangQuickButtons');
+      const registry = getGangRegistry();
+      const picked = [];
+      for (const item of registry) {
+        const seed = item.name || (item.keywords || [])[0] || '';
+        if (!seed) continue;
+        picked.push(seed.replace(/（.*?）/g, '').split('/')[0].trim());
+        if (picked.length >= 4) break;
+      }
+      const samples = picked.length ? picked : ['Fisher', '青', 'オレンジ', '半グレ'];
+      wrap.innerHTML = samples.map(word => `<button class="quick-btn" onclick="fillGangSearch('${String(word).replace(/'/g, "\'")}')">${escapeHtml(word)}</button>`).join('');
+    }
+
+    function renderGangRegistryList() {
+      const list = getGangRegistry();
+      const wrap = document.getElementById('gangRegistryList');
+      if (!wrap) return;
+      if (!list.length) {
+        wrap.innerHTML = '<div class="empty-note">共有ギャングデータはまだありません。</div>';
+        return;
+      }
+      wrap.innerHTML = list.map(item => `
+        <div class="registry-item">
+          <div class="registry-head">
+            <div>
+              <div style="font-size:20px;font-weight:800;color:var(--accent2);">${escapeHtml(item.name)}</div>
+              <div class="muted-inline">プライマリー: ${escapeHtml(item.primary || '-')} / セカンダリー: ${escapeHtml(item.secondary || '-')}</div>
+              <div class="muted-inline">パール: ${escapeHtml(item.pearl || '-')} / ホイール: ${escapeHtml(item.wheel || '-')}</div>
+            </div>
+          </div>
+          <div class="tag-wrap">${(item.keywords || []).map(k => `<span class="tag">${escapeHtml(k)}</span>`).join('')}</div>
+        </div>
+      `).join('');
+    }
+
+    function searchGangData() {
+      const input = document.getElementById('gangSearchInput');
+      const box = document.getElementById('gangResult');
+      if (!input || !box) return;
+      const qRaw = input.value;
+      const q = normalizeText(qRaw);
+      const registry = getGangRegistry();
+      if (!q) {
+        box.innerHTML = '<div class="empty-note">検索ワードを入れてください。</div>';
+        return;
+      }
+      const hits = registry.filter(item => {
+        const words = [item.name, item.primary, item.secondary, item.pearl, item.wheel, ...(item.keywords || [])].map(normalizeText);
+        return words.some(word => word.includes(q) || q.includes(word));
+      });
+      if (!hits.length) {
+        box.innerHTML = `<div class="empty-note">「${escapeHtml(qRaw)}」に一致するデータはありません。</div>`;
+        return;
+      }
+      box.innerHTML = hits.map(item => `
+        <div style="padding-bottom:14px;margin-bottom:14px;border-bottom:1px dashed rgba(168,198,179,0.18);">
+          <div style="font-size:24px;font-weight:800;color:var(--accent2);margin-bottom:10px;">${escapeHtml(item.name)}</div>
+          <div class="summary-split">
+            <div class="panel"><div class="muted-inline">プライマリー</div><div>${escapeHtml(item.primary || '-')}</div></div>
+            <div class="panel"><div class="muted-inline">セカンダリー</div><div>${escapeHtml(item.secondary || '-')}</div></div>
+            <div class="panel"><div class="muted-inline">パール</div><div>${escapeHtml(item.pearl || '-')}</div></div>
+            <div class="panel"><div class="muted-inline">ホイール</div><div>${escapeHtml(item.wheel || '-')}</div></div>
+          </div>
+          <div class="tag-wrap">${(item.keywords || []).map(k => `<span class="tag">${escapeHtml(k)}</span>`).join('')}</div>
+        </div>
+      `).join('');
+    }
+
+    function loadWorkState() {
+      try {
+        const raw = localStorage.getItem(WORK_STORAGE_KEY);
+        if (!raw) {
+          return { repair: {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0}, paint: {1:0,2:0,3:0,4:0}, history: [] };
+        }
+        const parsed = JSON.parse(raw);
+        return {
+          repair: {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0, ...(parsed.repair || {})},
+          paint: {1:0,2:0,3:0,4:0, ...(parsed.paint || {})},
+          history: Array.isArray(parsed.history) ? parsed.history : []
+        };
+      } catch (e) {
+        return { repair: {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0}, paint: {1:0,2:0,3:0,4:0}, history: [] };
+      }
+    }
+
+    function saveWorkState() {
+      localStorage.setItem(WORK_STORAGE_KEY, JSON.stringify(workState));
+    }
+
+    function addWorkCount(type, points) {
+      workState[type][points] = (Number(workState[type][points]) || 0) + 1;
+      workState.history.unshift({ id: Date.now(), type, points, time: getNowString() });
+      saveWorkState();
+      renderWorkCounter();
+    }
+
+    function undoWorkHistory() {
+      const last = workState.history[0];
+      if (!last) { alert('戻せる履歴がありません。'); return; }
+      if (workState[last.type] && workState[last.type][last.points] > 0) workState[last.type][last.points] -= 1;
+      workState.history.shift();
+      saveWorkState();
+      renderWorkCounter();
+    }
+
+    function resetRepairCounts() {
+      if (!confirm('修理カウンターだけをリセットします。よろしいですか？')) return;
+      workState.repair = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0};
+      workState.history = workState.history.filter(item => item.type !== 'repair');
+      saveWorkState();
+      renderWorkCounter();
+    }
+
+    function resetPaintCounts() {
+      if (!confirm('色替えカウンターだけをリセットします。よろしいですか？')) return;
+      workState.paint = {1:0,2:0,3:0,4:0};
+      workState.history = workState.history.filter(item => item.type !== 'paint');
+      saveWorkState();
+      renderWorkCounter();
+    }
+
+    function resetAllWorkCounts() {
+      if (!confirm('作業カウンターをすべてリセットします。よろしいですか？')) return;
+      workState = { repair: {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0}, paint: {1:0,2:0,3:0,4:0}, history: [] };
+      saveWorkState();
+      renderWorkCounter();
+    }
+
+    function sumCounterValues(obj) { return Object.values(obj).reduce((s, v) => s + (Number(v) || 0), 0); }
+    function sumCounterPoints(obj) { return Object.entries(obj).reduce((s, [k,v]) => s + (Number(k) * (Number(v)||0)), 0); }
+
+    function renderCounterButtons() {
+      const repairWrap = document.getElementById('repairCounterButtons');
+      const paintWrap = document.getElementById('paintCounterButtons');
+      if (!repairWrap || !paintWrap) return;
+      repairWrap.innerHTML = Array.from({length:8}, (_,i)=>i+1)
+        .map(n => `<button class="counter-btn" onclick="addWorkCount('repair', ${n})">${n}</button>`)
+        .join('');
+      paintWrap.innerHTML = Array.from({length:4}, (_,i)=>i+1)
+        .map(n => `<button class="counter-btn" onclick="addWorkCount('paint', ${n})">${n}</button>`)
+        .join('');
+    }
+
+    function renderMiniRows(targetId, dataObj) {
+      document.getElementById(targetId).innerHTML = Object.keys(dataObj).map(k => `<div class="mini-row"><span>${k}か所</span><strong>${Number(dataObj[k]||0)}台</strong></div>`).join('');
+    }
+
+    function renderWorkCounter() {
+      renderMiniRows('repairSummaryRows', workState.repair);
+      renderMiniRows('paintSummaryRows', workState.paint);
+      const repairCars = sumCounterValues(workState.repair);
+      const paintCars = sumCounterValues(workState.paint);
+      const repairPoints = sumCounterPoints(workState.repair);
+      const paintPoints = sumCounterPoints(workState.paint);
+      document.getElementById('repairCarsCount').innerText = formatNumber(repairCars);
+      document.getElementById('paintCarsCount').innerText = formatNumber(paintCars);
+      document.getElementById('allCarsCount').innerText = formatNumber(repairCars + paintCars);
+      document.getElementById('repairPointsCount').innerText = formatNumber(repairPoints);
+      document.getElementById('paintPointsCount').innerText = formatNumber(paintPoints);
+      document.getElementById('allPointsCount').innerText = formatNumber(repairPoints + paintPoints);
+      const historyWrap = document.getElementById('workHistoryList');
+      if (!workState.history.length) {
+        historyWrap.innerHTML = '<div class="empty-note">まだ作業履歴はありません。</div>';
+      } else {
+        historyWrap.innerHTML = workState.history.map(item => `<div class="history-chip"><strong>${item.type === 'repair' ? '修理' : '色替え'} ${item.points}か所</strong><div class="muted-inline">${escapeHtml(item.time)}</div></div>`).join('');
+      }
+    }
+
+    const originalUnlockApp = unlockApp;
+    unlockApp = async function() {
+      const input = document.getElementById('unlockCode').value.trim();
+      if (input !== getSavedPasscode()) {
+        alert('パスコードが違います。');
+        return;
+      }
+      document.getElementById('lockWrapper').classList.add('hidden');
+      document.getElementById('appWrapper').classList.remove('hidden');
+      showPage('homePage');
+      calc();
+      renderHistory();
+      renderCounterButtons();
+      renderWorkCounter();
+      await loadGangRegistry();
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      renderCounterButtons();
+      renderWorkCounter();
+      try {
+        await loadGangRegistry();
+      } catch (e) {
+        console.warn('ギャングデータ読み込みエラー', e);
+      }
+      renderCounterButtons();
+      renderWorkCounter();
+    });
+
+  </script>
+</body>
+</html>
+    "name": "Fisher（青ギャング）",
+    "primary": "アノダイズドブルー（カメレオン）",
+    "secondary": "",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "fisher",
+      "青",
+      "ブルー"
+    ]
+  }
+]
 
 <h1>ギャングカラー検索</h1>
 <input id="search" placeholder="検索">
