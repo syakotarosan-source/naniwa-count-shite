@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>なにわモーター統合ツール</title>
-<style>
-body{background:#f8fafc;color:#0f172a;font-family:sans-serif;margin:0;padding:20px;}
-.card{background:#ffffff;border-radius:12px;padding:16px;margin-bottom:16px;}
-button{background:#22c55e;color:#fff;border:none;padding:10px;border-radius:8px;}
-</style>
-</head>
-<body>[
-  {<!DOCTYPE html>
-<html lang="ja">
-<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>なにわモーター 統合ツール 完全版</title>
@@ -22,8 +10,310 @@ button{background:#22c55e;color:#fff;border:none;padding:10px;border-radius:8px;
     :root {
       --bg1: #08110d;
       --bg2: #0d1712;
-      --card: rgba(14, 24, 19, 0.96);
-      --card2: #0a120e;
+      --card: rgba(14, 2[
+  {
+    "name": "Fisher（青ギャング）",
+    "primary": "アノダイズドブルー（カメレオン）",
+    "secondary": "",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "fisher",
+      "青",
+      "ブルー"
+    ]
+  }
+]<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>なにわモーター統合ツール</title>
+<style>
+body{background:#f8fafc;color:#0f172a;font-family:sans-serif;margin:0;padding:20px;}
+.card{background:#ffffff;border-radius:12px;padding:16px;margin-bottom:16px;}
+button{background:#22c55e;color:#fff;border:none;padding:10px;border-radius:8px;}
+</style>
+</head>
+<body>
+
+<h1>ギャングカラー検索</h1>
+<input id="search" placeholder="検索">
+<button onclick="search()">検索</button>
+
+<div id="result"></div>
+
+<script>
+let gangData=[];
+
+fetch('gang-data.json')
+.then(res=>res.json())
+.then(data=>{gangData=data;});
+
+function search(){
+  const q=document.getElementById('search').value;
+  const r=gangData.filter(g=>g.name.includes(q));
+  document.getElementById('result').innerHTML=
+    r.map(g=>`<div class="card">${g.name}<br>${g.primary}</div>`).join('');
+}
+</script>
+
+</body>
+</html>
+4, 19, 0.96);
+      --card2: #0a120e;[
+  {
+    "name": "lvy半グレ / まっくろくろす",
+    "primary": "アノダイズドパープル（カメレオン）",
+    "secondary": "アノダイズドパープル（カメレオン）",
+    "pearl": "スピネーカーパープル（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "lvy半グレ",
+      "まっくろくろす",
+      "lvy",
+      "半グレ",
+      "半ぐれ",
+      "紫",
+      "パープル"
+    ]
+  },
+  {
+    "name": "Fisher（青ギャング）",
+    "primary": "アノダイズドブルー（カメレオン）",
+    "secondary": "",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "Fisher",
+      "フィッシャー",
+      "青ギャング",
+      "青",
+      "ブルー"
+    ]
+  },
+  {
+    "name": "オレンジギャング",
+    "primary": "オレンジ（マット）",
+    "secondary": "",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "オレンジギャング",
+      "オレンジ",
+      "橙"
+    ]
+  },
+  {
+    "name": "Lui / アデルウルフ / 白",
+    "primary": "ミッドナイトブルー（マット）",
+    "secondary": "",
+    "pearl": "ブラック（マット）",
+    "wheel": "",
+    "keywords": [
+      "Lui",
+      "アデルウルフ",
+      "白",
+      "ルイ"
+    ]
+  },
+  {
+    "name": "ばり紫",
+    "primary": "アノダイズドパープル（カメレオン）",
+    "secondary": "アノダイズドパープル（カメレオン）",
+    "pearl": "オフホワイト（カメレオン）",
+    "wheel": "",
+    "keywords": [
+      "ばり紫",
+      "紫",
+      "パープル"
+    ]
+  },
+  {
+    "name": "白ギャング",
+    "primary": "アイスホワイト",
+    "secondary": "",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "白ギャング",
+      "白",
+      "ホワイト"
+    ]
+  },
+  {
+    "name": "水色（旧水色ではない方）",
+    "primary": "RGB(34,158,186)",
+    "secondary": "RGB(34,158,186)",
+    "pearl": "ブラック（マット）",
+    "wheel": "",
+    "keywords": [
+      "水色",
+      "旧水色ではない方"
+    ]
+  },
+  {
+    "name": "水色ギャング",
+    "primary": "フブキ（カメレオン）",
+    "secondary": "フブキ（カメレオン）",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "水色ギャング",
+      "水色",
+      "フブキ"
+    ]
+  },
+  {
+    "name": "水色（おやま半ぐれ）",
+    "primary": "RGB(143,229,255)",
+    "secondary": "RGB(143,229,255)",
+    "pearl": "アイスホワイト（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "水色",
+      "おやま半ぐれ",
+      "おやま"
+    ]
+  },
+  {
+    "name": "空色",
+    "primary": "55.ライトブルー（メタリック）",
+    "secondary": "アイスホワイト（メタリック）",
+    "pearl": "アイスホワイト（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "空色",
+      "ライトブルー"
+    ]
+  },
+  {
+    "name": "黄緑半グレ",
+    "primary": "ライムグリーン（メタリック）",
+    "secondary": "ライムグリーン（メタリック）",
+    "pearl": "ブラック（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "黄緑半グレ",
+      "黄緑",
+      "ライムグリーン"
+    ]
+  },
+  {
+    "name": "緑半ぐれ（白上さん）",
+    "primary": "ミッドナイトパープル（マット）",
+    "secondary": "ミッドナイトパープル（マット）",
+    "pearl": "ウルトラブルー（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "緑半ぐれ",
+      "白上さん",
+      "緑"
+    ]
+  },
+  {
+    "name": "ザウバー",
+    "primary": "RGB(0,50,50)クラシック",
+    "secondary": "ブラック（メタリック）",
+    "pearl": "シルバー（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "ザウバー"
+    ]
+  },
+  {
+    "name": "青緑半ぐれ",
+    "primary": "グラファイト（メタリック）",
+    "secondary": "ブラック（メタリック）",
+    "pearl": "ミッドナイトシルバー（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "青緑半ぐれ",
+      "青緑"
+    ]
+  },
+  {
+    "name": "かすみさん半ぐれ",
+    "primary": "RGB（14,43,43）",
+    "secondary": "RGB（8,8,8）",
+    "pearl": "アノダイズトグリーン（カメレオン）",
+    "wheel": "",
+    "keywords": [
+      "かすみさん半ぐれ",
+      "かすみさん",
+      "かすみ"
+    ]
+  },
+  {
+    "name": "ノーネーム（紫ギャング）",
+    "primary": "メタリック シャフターパープル",
+    "secondary": "メタリック ライムグリーン",
+    "pearl": "マット シャフターパープル",
+    "wheel": "",
+    "keywords": [
+      "ノーネーム",
+      "紫ギャング",
+      "紫"
+    ]
+  },
+  {
+    "name": "影斑（ロギアさん）",
+    "primary": "モノクローム（カメレオン）",
+    "secondary": "モノクローム（カメレオン）",
+    "pearl": "アイスホワイト（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "影斑",
+      "ロギアさん"
+    ]
+  },
+  {
+    "name": "青半グレ（かぶさん）",
+    "primary": "ブルー（メタリック）",
+    "secondary": "ブルー（メタリック）",
+    "pearl": "フブキ（カメレオン）",
+    "wheel": "",
+    "keywords": [
+      "青半グレ",
+      "かぶさん",
+      "青"
+    ]
+  },
+  {
+    "name": "茶色（リップ）",
+    "primary": "rgb(61, 52, 44)",
+    "secondary": "rgb(61, 52, 44)",
+    "pearl": "パイソンブラウン（メタリック）",
+    "wheel": "",
+    "keywords": [
+      "茶色",
+      "リップ",
+      "ブラウン"
+    ]
+  },
+  {
+    "name": "黄色",
+    "primary": "レースイエロー（メタリック）",
+    "secondary": "レースイエロー（メタリック）",
+    "pearl": "",
+    "wheel": "",
+    "keywords": [
+      "黄色",
+      "イエロー"
+    ]
+  },
+  {
+    "name": "ピンク（Rosalia）",
+    "primary": "rgb(245, 150, 189)",
+    "secondary": "rgb(245, 150, 189)",
+    "pearl": "rgb(174, 165, 212)",
+    "wheel": "",
+    "keywords": [
+      "ピンク",
+      "Rosalia",
+      "ロザリア"
+    ]
+  }
+]
       --line: #234335;
       --line2: #2d4b3d;
       --text: #eef7f1;
@@ -2185,41 +2475,5 @@ button{background:#22c55e;color:#fff;border:none;padding:10px;border-radius:8px;
     });
 
   </script>
-</body>
-</html>
-    "name": "Fisher（青ギャング）",
-    "primary": "アノダイズドブルー（カメレオン）",
-    "secondary": "",
-    "pearl": "",
-    "wheel": "",
-    "keywords": [
-      "fisher",
-      "青",
-      "ブルー"
-    ]
-  }
-]
-
-<h1>ギャングカラー検索</h1>
-<input id="search" placeholder="検索">
-<button onclick="search()">検索</button>
-
-<div id="result"></div>
-
-<script>
-let gangData=[];
-
-fetch('gang-data.json')
-.then(res=>res.json())
-.then(data=>{gangData=data;});
-
-function search(){
-  const q=document.getElementById('search').value;
-  const r=gangData.filter(g=>g.name.includes(q));
-  document.getElementById('result').innerHTML=
-    r.map(g=>`<div class="card">${g.name}<br>${g.primary}</div>`).join('');
-}
-</script>
-
 </body>
 </html>
