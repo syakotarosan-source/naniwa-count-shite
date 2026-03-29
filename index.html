@@ -2298,21 +2298,46 @@
       const input = document.getElementById('gangSearchInput');
       const box = document.getElementById('gangResult');
       if (!input || !box) return;
-      const qRaw = input.value;
+
+      const qRaw = input.value.trim();
       const q = normalizeText(qRaw);
       const registry = getGangRegistry();
+
       if (!q) {
         box.innerHTML = '<div class="empty-note">検索ワードを入れてください。</div>';
         return;
       }
-      const hits = registry.filter(item => {
-        const words = [item.name, item.primary, item.secondary, item.pearl, item.wheel, ...(item.keywords || [])].map(normalizeText);
-        return words.some(word => word.includes(q) || q.includes(word));
-      });
+
+      const terms = qRaw.split(/[\s　]+/).map(normalizeText).filter(Boolean);
+
+      const scoredHits = registry.map(item => {
+        const fields = [item.name, item.primary, item.secondary, item.pearl, item.wheel, ...(item.keywords || [])]
+          .map(v => String(v || ''));
+        const normalizedFields = fields.map(normalizeText);
+
+        const allMatched = terms.every(term => normalizedFields.some(field => field.includes(term)));
+        if (!allMatched) return null;
+
+        let score = 0;
+        normalizedFields.forEach(field => {
+          terms.forEach(term => {
+            if (!term || !field) return;
+            if (field === term) score += 100;
+            else if (field.startsWith(term)) score += 50;
+            else if (field.includes(term)) score += 20;
+          });
+        });
+
+        return { item, score };
+      }).filter(Boolean).sort((a, b) => b.score - a.score);
+
+      const hits = scoredHits.map(x => x.item);
+
       if (!hits.length) {
         box.innerHTML = `<div class="empty-note">「${escapeHtml(qRaw)}」に一致するデータはありません。</div>`;
         return;
       }
+
       box.innerHTML = hits.map(item => `
         <div style="padding-bottom:14px;margin-bottom:14px;border-bottom:1px dashed rgba(168,198,179,0.18);">
           <div style="font-size:24px;font-weight:800;color:var(--accent2);margin-bottom:10px;">${escapeHtml(item.name)}</div>
@@ -2325,6 +2350,17 @@
           <div class="tag-wrap">${(item.keywords || []).map(k => `<span class="tag">${escapeHtml(k)}</span>`).join('')}</div>
         </div>
       `).join('');
+    }
+
+    function setupGangSearchInput() {
+      const input = document.getElementById('gangSearchInput');
+      if (!input) return;
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          searchGangData();
+        }
+      });
     }
 
     function loadWorkState() {
@@ -2445,6 +2481,7 @@
     };
 
     document.addEventListener('DOMContentLoaded', async () => {
+      setupGangSearchInput();
       renderCounterButtons();
       renderWorkCounter();
       try {
